@@ -10,7 +10,7 @@ terraform {
 
     }
     argocd = {
-      source = "argoproj-labs/argocd"
+      source  = "argoproj-labs/argocd"
       version = "7.3.0"
     }
   }
@@ -37,8 +37,8 @@ data "terraform_remote_state" "network" {
 }
 
 resource "argocd_repository" "crossplane_repo" {
-  repo     = "https://github.com/PierreStephaneVoltaire/kubernetes-playground-crossplane.git"
-  type     = "git"
+  repo = "https://github.com/PierreStephaneVoltaire/kubernetes-playground-crossplane.git"
+  type = "git"
 }
 resource "kubernetes_namespace" "crossplane" {
   metadata {
@@ -72,7 +72,7 @@ resource "argocd_project" "crossplane" {
       clusters     = ["*"]
       namespaces   = ["*"]
       duration     = "360s"
-      schedule     ="*/5 * * * *"
+      schedule     = "*/5 * * * *"
       manual_sync  = true
     }
     namespace_resource_whitelist {
@@ -110,7 +110,7 @@ resource "argocd_application" "crossplane" {
       target_revision = "1.18.2"
 
       helm {
-        value_files = ["https://raw.githubusercontent.com/PierreStephaneVoltaire/kubernetes-playground-crossplane/refs/heads/master/crossplane/values.yaml"]  # Use your existing values.yaml
+        value_files = ["https://raw.githubusercontent.com/PierreStephaneVoltaire/kubernetes-playground-crossplane/refs/heads/master/crossplane/values.yaml"] # Use your existing values.yaml
       }
     }
 
@@ -122,8 +122,8 @@ resource "argocd_application" "crossplane" {
 
     sync_policy {
       automated {
-        prune      = true
-        self_heal  = true
+        prune     = true
+        self_heal = true
       }
     }
   }
@@ -151,8 +151,8 @@ resource "argocd_application" "provider_terraform" {
 
     sync_policy {
       automated {
-        prune      = true
-        self_heal  = true
+        prune     = true
+        self_heal = true
       }
     }
   }

@@ -32,7 +32,7 @@ provider "kubectl" {
   cluster_ca_certificate = base64decode(data.terraform_remote_state.eks.outputs.cluster_certificate_authority_data)
 }
 provider "argocd" {
-  server_addr    = var.argocd_server
-  username = var.argocd_username
-  password = var.argocd_password
+  server_addr = var.argocd_server
+  username    = var.argocd_username
+  password    = var.argocd_password
 }

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "crossplane" {
-  name = "${var.app_name}-crossplane"
+  name               = "${var.app_name}-crossplane"
   assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json
 }
 
@@ -8,12 +8,12 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
     actions = ["sts:AssumeRoleWithWebIdentity"]
 
     principals {
-      type = "Federated"
+      type        = "Federated"
       identifiers = [data.terraform_remote_state.eks.outputs.oidc_provider_arn]
     }
     condition {
       test     = "StringEquals"
-      values = ["system:serviceaccount:crossplane-system:crossplane-aws-sa"]
+      values   = ["system:serviceaccount:crossplane-system:crossplane-aws-sa"]
       variable = "${data.terraform_remote_state.eks.outputs.oidc_provider}:sub"
     }
   }
@@ -127,6 +127,6 @@ resource "aws_iam_policy" "policy" {
 }
 resource "aws_iam_policy_attachment" "crossplane" {
   name       = "crossplane"
-  roles = [aws_iam_role.crossplane.name]
+  roles      = [aws_iam_role.crossplane.name]
   policy_arn = aws_iam_policy.policy.arn
 }
