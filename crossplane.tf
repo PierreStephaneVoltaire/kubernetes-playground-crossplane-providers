@@ -95,6 +95,7 @@ resource "aws_iam_policy" "policy" {
             "kms:Decrypt",
             "kms:GenerateDataKey",
             "kms:DescribeKey",
+            "acm:*",
             "iam:PassRole"
           ],
           "Resource" : "*"
