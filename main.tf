@@ -128,32 +128,3 @@ resource "argocd_application" "crossplane" {
     }
   }
 }
-resource "argocd_application" "provider_terraform" {
-  depends_on = [argocd_application.crossplane]
-  metadata {
-    name      = "provider-terraform"
-    namespace = "argocd"
-  }
-
-  spec {
-    project = argocd_project.crossplane.metadata[0].name
-
-    source {
-      repo_url        = argocd_repository.crossplane_repo.repo
-      target_revision = "master"
-      path            = "crossplane"
-    }
-
-    destination {
-      server    = "https://kubernetes.default.svc"
-      namespace = kubernetes_namespace.crossplane.metadata[0].name
-    }
-
-    sync_policy {
-      automated {
-        prune     = true
-        self_heal = true
-      }
-    }
-  }
-}

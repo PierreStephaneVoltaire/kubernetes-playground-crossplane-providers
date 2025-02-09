@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
   }
 }
 
-resource "kubernetes_service_account" "vault" {
+resource "kubernetes_service_account" "sa" {
   metadata {
     name      = "crossplane-aws-sa"
     namespace = kubernetes_namespace.crossplane.metadata[0].name

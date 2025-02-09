@@ -1,6 +1,6 @@
 variable "app_name" {
   type    = string
-  default = "infra"
+  default = "playground"
 }
 variable "tags" {
   type = map(string)
