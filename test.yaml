@@ -1,0 +1,8 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: my-resource-group
+spec:
+  forProvider:
+    location: Canada Central
+

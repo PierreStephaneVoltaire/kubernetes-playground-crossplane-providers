@@ -28,3 +28,7 @@ variable "argocd_username" {
 variable "argocd_password" {
   type = string
 }
+variable "subscription_id" {
+  type      = string
+  sensitive = true
+}

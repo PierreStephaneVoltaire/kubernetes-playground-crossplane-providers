@@ -36,3 +36,8 @@ provider "argocd" {
   username    = var.argocd_username
   password    = var.argocd_password
 }
+provider "azurerm" {
+  features {}
+  subscription_id = var.subscription_id
+}
+
